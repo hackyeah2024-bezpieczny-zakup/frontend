@@ -1,0 +1,28 @@
+{
+    "manifest_version": 3,
+    "name": "Bezpieczny zakup",
+    "version": "1.0",
+    "description": "!TODO! jakis tekscki na opis",
+    "permissions": [
+      "tabs",
+      "scripting",
+      "webNavigation",
+      "notifications"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ],
+    "icons": {
+      "128": "default.png"
+    },
+    "host_permissions": [
+      "*://*/*"
+    ]
+  }
+  
