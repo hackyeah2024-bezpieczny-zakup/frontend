@@ -5,6 +5,12 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 
             try {
                 hostname = new URL(url).hostname;
+                if(!hostname.startsWith('www.')){
+                  hostname = 'www.' + hostname;
+                }
+                if (!hostname.endsWith('.pl')) {
+                  return
+                }
                 console.log("Navigated to domain:", hostname);
               } catch (error) {
                 console.error("Invalid URL:", url);
@@ -25,7 +31,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
                 //   chrome.action.setIcon({ path: iconPath, tabId: tabId });
               
                       // Send message to content script to show popup
-                  chrome.tabs.sendMessage(tabId, { action: 'showPopup', data: data.result })
+                  chrome.tabs.sendMessage(tabId, { action: 'showPopup', data: data.urlStatus })
       
               } catch (error) {
                 console.error("Error sending URL to server:", error);
